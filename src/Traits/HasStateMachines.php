@@ -20,7 +20,8 @@ trait HasStateMachines
 {
     public static function bootHasStateMachines()
     {
-        $model = new static();
+        $reflection = new \ReflectionClass(static::class);
+        $model = $reflection->newInstanceWithoutConstructor();
 
         collect($model->stateMachines)
             ->each(function ($_, $field) use ($model) {
